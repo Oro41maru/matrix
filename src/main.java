@@ -1,26 +1,21 @@
 public class main {
     public static void main(String[] args) {
-
-        System.out.println("Введите два числа ");
-        matrix mat = new matrix(matrix.num.nextInt(), matrix.num.nextInt());
+        matrix mc = new matrix(2, 2);
+        matrix mc2 = new matrix(2, 2);
+        matrix mc3 = new matrix(2,2);
+        matrix mc4 = new matrix(2,2);
+        matrix mc5 = new matrix(2,2);
+        mc.vivod();
         System.out.println();
-
-        System.out.println("Сложение ");
-        mat.slozhenie(mat.mat1,mat.mat2);
+        mc2.vivod();
         System.out.println();
-
-        System.out.println("чиcло");
-        mat.umnozhenie(mat.mat1, matrix.num.nextInt());
+        mc3 = mc.sloz(mc2);
+        mc3.vivod();
         System.out.println();
-        mat.umnozhenie(mat.mat2, mat.c);
+        mc4 = mc.unch(2);
+        mc4.vivod();
         System.out.println();
-
-        System.out.println("Умножение матриц");
-        mat.umnozhenieMat(mat.mat1,mat.mat2);
-        System.out.println();
-
+        mc5 = mc.umMat(mc2);
+        mc5.vivod();
     }
-
-
 }
-

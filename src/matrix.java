@@ -1,72 +1,77 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class matrix {
-    public static Scanner num = new Scanner(System.in);
     int a;
     int b;
-    int c;
-    int[][] mat1;
-    int [][] mat2;
+    int[][] m;
 
-    public matrix(int a, int b) {
-        Random random = new Random();
+
+    public matrix(int a, int b){
+        Random rd = new Random();
+        m = new int[a][b];
+        for(int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                set(i,j, rd.nextInt(11));
+            }
+        }
         this.a = a;
         this.b = b;
-        int[][] mat1 = new int[a][b];
-        int[][] mat2 = new int[a][b];
-
-        for (int i = 0; i < mat1.length; i++) {
-            for (int j = 0; j < mat1[i].length; j++) {
-                mat1[i][j] = random.nextInt(25);
-                System.out.print(mat1[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-
-        for (int i = 0; i < mat2.length; i++) {
-            for (int j = 0; j < mat2[i].length; j++) {
-                mat2[i][j] = random.nextInt(10);
-                System.out.print(mat2[i][j] + " ");
-            }
-            System.out.println();
-        }
-        this.mat1 = mat1;
-        this.mat2 = mat2;
+    }
+    public void set(int a, int b, int c){
+        m[a][b] = c;
     }
 
-    public void slozhenie(int[][] mat1, int[][] mat2) {
-        int[][] mat3 = new int[a][b];
-        for (int i = 0; i < mat1.length; i++) {
-            for (int j = 0; j < mat1[i].length; j++) {
-                mat3[i][j] = mat1[i][j] + mat2[i][j];
-                System.out.print(mat3[i][j] + " ");
+    public int get(int a, int b){
+        return m[a][b];
+    }
+
+    void vivod() {
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                System.out.print(get(i, j) + " ");
             }
             System.out.println();
         }
     }
 
-    public void umnozhenie(int[][] mat1, int c) {
-        this.c = c;
-        int[][] multi = new int[a][b];
-        for (int i = 0; i < mat1.length; i++) {
-            for (int j = 0; j < mat1[i].length; j++) {
-                multi[i][j] = mat1[i][j] * c;
-                System.out.print(multi[i][j] + " ");
+    matrix sloz(matrix m){
+        matrix mc = new matrix(m.a, m.b);
+        for(int i = 0; i < m.a; i++) {
+            for (int j = 0; j < m.b; j++) {
+                mc.set(i, j, get(i,j)+m.get(i,j));
             }
-            System.out.println();
         }
+        return mc;
     }
 
-    public void umnozhenieMat(int[][] mat1, int[][] mat2) {
-        int e;
-        for (int i = 0; i< mat1.length; i++){
-            for(int j = 0;j < mat1[i].length; j++){
-                    e = mat1[i][j] * mat2[i][j];
-                System.out.print(e + " ");
+    matrix unch(int u){
+        matrix mc = new matrix(a,b);
+        for(int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                mc.set(i, j, get(i,j)*u);
             }
-            System.out.println();
         }
+        return mc;
+    }
+    matrix umMat(matrix m){
+        matrix mc = new matrix(a,b);
+        int r=0;
+        for(int i = 0; i < mc.a; i++) {
+            for (int j = 0; j < mc.b; j++) {
+                if(mc.a < mc.b) {
+                    for (int k = 0; k < mc.a; k++) {
+                        r = r + (get(i,k) * m.get(k,j));
+                    }
+                }
+                else {
+                    for (int k = 0; k < mc.b; k++) {
+                        r = r + (get(i,k) * m.get(k,j));
+                    }
+                }
+                mc.set(i,j, r);
+                r=0;
+            }
+        }
+        return mc;
     }
 }
